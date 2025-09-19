@@ -1,0 +1,6 @@
+@FiapSrvAuthManager.API_HostAddress = http://localhost:5271
+
+GET {{FiapSrvAuthManager.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
