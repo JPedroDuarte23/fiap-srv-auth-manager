@@ -6,12 +6,12 @@ using FiapSrvAuthManager.Application.Exceptions;
 using FiapSrvAuthManager.Application.Interface;
 using FiapSrvAuthManager.Domain.Entities;
 using FiapSrvAuthManager.Domain.Enums;
-using FiapSrvAuthManager.Domain.Interface;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FiapCloudGames.Application.Services;
+
+namespace FiapSrvAuthManager.Application.Services;
 
 public class AuthService : IAuthService
 {

@@ -46,8 +46,8 @@ public class ExceptionHandlerTests
         context.Response.Body = new System.IO.MemoryStream();
         var loggerMock = new Mock<ILogger<ExceptionHandler>>();
 
-        // HttpException jï¿½ ï¿½ pï¿½blica e recebe status, mensagem e erro
-        var httpEx = new HttpException(404, "Nï¿½o encontrado", "Nï¿½o encontrado");
+        // HttpException já é pública e recebe status, mensagem e erro
+        var httpEx = new HttpException(404, "Não encontrado", "Não encontrado");
 
         RequestDelegate next = ctx => throw httpEx;
         var middleware = new ExceptionHandler(next, loggerMock.Object);
@@ -62,8 +62,8 @@ public class ExceptionHandlerTests
         var response = await new System.IO.StreamReader(context.Response.Body).ReadToEndAsync();
 
         var json = JsonDocument.Parse(response);
-        Assert.Equal("Nï¿½o encontrado", json.RootElement.GetProperty("message").GetString());
-        Assert.Equal("Nï¿½o encontrado", json.RootElement.GetProperty("error").GetString());
+        Assert.Equal("Não encontrado", json.RootElement.GetProperty("message").GetString());
+        Assert.Equal("Não encontrado", json.RootElement.GetProperty("error").GetString());
         Assert.Equal(404, json.RootElement.GetProperty("statusCode").GetInt32());
         Assert.False(string.IsNullOrWhiteSpace(json.RootElement.GetProperty("traceId").GetString()));
     }
@@ -74,7 +74,7 @@ public class ExceptionHandlerTests
         var context = new DefaultHttpContext();
         context.Response.Body = new System.IO.MemoryStream();
         var loggerMock = new Mock<ILogger<ExceptionHandler>>();
-        var ex = new Exception("Erro genï¿½rico");
+        var ex = new Exception("Erro genérico");
 
         RequestDelegate next = ctx => throw ex;
 
@@ -87,9 +87,9 @@ public class ExceptionHandlerTests
         context.Response.Body.Seek(0, System.IO.SeekOrigin.Begin);
         var response = await new System.IO.StreamReader(context.Response.Body).ReadToEndAsync();
 
-        // Parse do JSON e validaï¿½ï¿½o das propriedades
+        // Parse do JSON e validação das propriedades
         var json = JsonDocument.Parse(response);
-        Assert.Equal("Erro genï¿½rico", json.RootElement.GetProperty("message").GetString());
+        Assert.Equal("Erro genérico", json.RootElement.GetProperty("message").GetString());
         Assert.Equal("Internal Server Error", json.RootElement.GetProperty("error").GetString());
         Assert.Equal(500, json.RootElement.GetProperty("statusCode").GetInt32());
     }

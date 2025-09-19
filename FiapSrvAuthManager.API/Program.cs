@@ -1,13 +1,11 @@
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
-using FiapCloudGames.Application.Services;
+using FiapSrvAuthManager.Application.Services;
 using FiapSrvAuthManager.Application.Interface;
-
 using FiapSrvAuthManager.Infrastructure.Configuration;
 using FiapSrvAuthManager.Infrastructure.Mappings;
 using FiapSrvAuthManager.Infrastructure.Middleware;
 using FiapSrvAuthManager.Infrastructure.Repository;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;

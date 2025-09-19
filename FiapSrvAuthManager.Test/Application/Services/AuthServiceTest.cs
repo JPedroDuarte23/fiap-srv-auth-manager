@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using FiapSrvAuthManager.Application;
+using FiapSrvAuthManager.Application.DTOs;
 using FiapSrvAuthManager.Application.Exceptions;
 using FiapSrvAuthManager.Application.Interface;
 using FiapSrvAuthManager.Application.Services;
