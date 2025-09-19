@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using FiapSrvAuthManager.Application.DTOs.Authenticate;
-using FiapSrvAuthManager.Application.DTOs.User;
+using FiapSrvAuthManager.Application.DTOs;
 using FiapSrvAuthManager.Application.Interface;
 using Microsoft.AspNetCore.Mvc;
 

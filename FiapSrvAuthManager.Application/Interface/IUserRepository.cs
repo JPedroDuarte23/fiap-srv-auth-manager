@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FiapSrvAuthManager.Domain.Entities;
 
-namespace FiapSrvAuthManager.Domain.Interface;
+namespace FiapSrvAuthManager.Application.Interface;
 
 
 public interface IUserRepository

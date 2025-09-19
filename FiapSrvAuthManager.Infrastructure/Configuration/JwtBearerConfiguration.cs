@@ -15,8 +15,8 @@ public static class JwtBearerConfiguration
 {
     public static void ConfigureJwtBearer(this IServiceCollection services, IConfiguration configuration, string jwtSigningKey)
     {
-        var issuer = configuration["Jwt:Issuer"] ?? "FiapCloudGamesApi";
-        var audience = configuration["Jwt:Audience"] ?? "FiapCloudGamesUsers";
+        var issuer = configuration["Jwt:Issuer"] ?? "fiap-srv-auth-manager";
+        var audience = configuration["Jwt:Audience"] ?? "FiapCloudGames";
         var keyBytes = Convert.FromBase64String(jwtSigningKey);
 
         services
