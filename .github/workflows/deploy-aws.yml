@@ -13,7 +13,7 @@ jobs:
       DOCKER_REPO: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
       ECS_CLUSTER: artistic-butterfly-mul6yt # O nome do seu cluster ECS
       # O nome do serviço no ECS (ex: fiap-srv-auth-manager-service)
-      ECS_SERVICE: ${{ github.event.repository.name }}-service
+      ECS_SERVICE: ${{ github.event.repository.name }}-task-service
       # O nome da família da task definition (ex: fiap-srv-auth-manager-task)
       ECS_TASK_DEFINITION: ${{ github.event.repository.name }}-task
       # O nome do contêiner dentro da task definition (geralmente o mesmo do repo)
