@@ -20,9 +20,10 @@ var builder = WebApplication.CreateBuilder(args);
 Log.Logger = SerilogConfiguration.ConfigureSerilog();
 builder.Host.UseSerilog();
 
-// 1. Configuração da AWS
+// 1. Configuraï¿½ï¿½o da AWS
 builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
 builder.Services.AddAWSService<IAmazonSimpleSystemsManagement>();
+builder.Services.AddAWSService<Amazon.S3.IAmazonS3>(); 
 
 string mongoConnectionString;
 string jwtSigningKey;
@@ -30,7 +31,7 @@ string databaseName = builder.Configuration["MongoDbSettings:DatabaseName"]!;
 
 if (!builder.Environment.IsDevelopment())
 {
-    Log.Information("Ambiente de Produção. Buscando segredos do AWS Parameter Store.");
+    Log.Information("Ambiente de Produï¿½ï¿½o. Buscando segredos do AWS Parameter Store.");
     var ssmClient = new AmazonSimpleSystemsManagementClient();
 
     // Busca a Connection String do MongoDB
@@ -51,7 +52,7 @@ if (!builder.Environment.IsDevelopment())
     });
     jwtSigningKey = jwtResponse.Parameter.Value;
 
-    // 2. Configuração do Data Protection com AWS S3
+    // 2. Configuraï¿½ï¿½o do Data Protection com AWS S3
     var s3Bucket = builder.Configuration["DataProtection:S3BucketName"];
     var s3KeyPrefix = builder.Configuration["DataProtection:S3KeyPrefix"];
     var s3DataProtectionConfig = new S3XmlRepositoryConfig(s3Bucket) { KeyPrefix = s3KeyPrefix };
@@ -68,13 +69,13 @@ else
     jwtSigningKey = builder.Configuration["Jwt:DevKey"]!;
 }
 
-// 3. Configuração do MongoDB e Repositórios
+// 3. Configuraï¿½ï¿½o do MongoDB e Repositï¿½rios
 builder.Services.AddSingleton<IMongoClient>(sp => new MongoClient(mongoConnectionString));
 builder.Services.AddSingleton(sp => sp.GetRequiredService<IMongoClient>().GetDatabase(databaseName));
 MongoMappings.ConfigureMappings();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-// 4. Injeção de Dependência do AuthService com a chave JWT
+// 4. Injeï¿½ï¿½o de Dependï¿½ncia do AuthService com a chave JWT
 // Precisamos usar uma factory para injetar a string 'jwtSigningKey' que buscamos
 builder.Services.AddScoped<IAuthService>(sp =>
     new AuthService(
@@ -91,7 +92,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
     });
 
-// -- Resto da configuração (Swagger, Middlewares, etc.) --
+// -- Resto da configuraï¿½ï¿½o (Swagger, Middlewares, etc.) --
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {
