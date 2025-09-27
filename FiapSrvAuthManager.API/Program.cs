@@ -23,7 +23,7 @@ builder.Host.UseSerilog();
 // 1. Configura��o da AWS
 builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
 builder.Services.AddAWSService<IAmazonSimpleSystemsManagement>();
-builder.Services.AddAWSService<Amazon.S3.IAmazonS3>(); 
+builder.Services.AddAWSService<Amazon.S3.IAmazonS3>();
 
 string mongoConnectionString;
 string jwtSigningKey;
@@ -131,5 +131,6 @@ app.UseMiddleware<ExceptionHandler>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapGet("/health", () => Results.Ok(new { status = "healthy" }));
 app.MapControllers();
 app.Run();
